@@ -9,7 +9,8 @@ rails server
 ```
 ## APIs
 ### get book list (meta)
-*GET* /books
+**GET** /books
+**GET** /authors/123/books
 ```json
 [
   {
@@ -23,7 +24,7 @@ rails server
 ]
 ```
 ### get individual book (meta)
-*GET* /books/123
+**GET** /books/123
 ```json
 {
   "id": 123,
@@ -34,21 +35,105 @@ rails server
   "last_updated": 12312312
 }
 ```
+### set individual book (meta)
+**POST** /books
+```json
+{
+  "name": "aaaa",
+  "author_id": 123
+}
+```
+### update individual book (meta)
+**PUT** /books/1
+```json
+{
+  "name": "aaax",
+  "author_id": 2
+}
+```
 ### get chapter lists
-*GET* /books/123/chapters
+**GET** /books/123/chapters
 * params:
 * int body: 0/1 to determine weather displaying body
 * int pg: page number for pagination
 ```json
 [
   {
+    "book_id": 1,
     "title": "xxxx",
     "author_name": "xxxx",
     "author_id": 123,
-    "
+    "index": 123,
+    "body": "xxxxx....."
   }
 ]
 ```
 #### response header
 * X_PAGINATION: {"total_page":10,"current_page":2}
+
 ### get each chapter
+**GET** /books/123/chapters/123
+```json
+{
+  "book_id": 1,
+  "title": "xxxx",
+  "author_name": "xxxx",
+  "author_id": 123,
+  "index": 123,
+  "body": "xxxxx....."
+}
+```
+### create chapter
+**GET** /books/123/chapters
+```json
+{
+  "book_id": 1,
+  "title": "xxxx",
+  "author_id": 123,
+  "index": 123,
+  "body": "xxxxx....."
+}
+```
+### update chapter
+**GET** /books/1/chapters/123
+```json
+{
+  "book_id": 1,
+  "title": "xxxx",
+  "author_id": 123,
+  "index": 123,
+  "body": "xxxxx....."
+}
+```
+### get authors
+**GET** /authors
+```json
+[
+  {
+    "id": 123,
+    "name": "aaaa"
+  },..
+]
+```
+### get authors
+**GET** /authors/123
+```json
+{
+  "id": 123,
+  "name": "aaaa"
+}
+```
+### set author
+**POST** /authors
+```json
+{
+  "name": "aaaa"
+}
+```
+### update author
+**PUT** /authors/1
+```json
+{
+  "name": "aaab"
+}
+```
