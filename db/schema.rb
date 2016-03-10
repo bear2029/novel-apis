@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160302071358) do
+ActiveRecord::Schema.define(version: 20160310071104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160302071358) do
     t.integer  "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "crawler_id"
   end
 
   add_index "books", ["author_id"], name: "index_books_on_author_id", using: :btree
@@ -47,6 +48,17 @@ ActiveRecord::Schema.define(version: 20160302071358) do
   add_index "chapters", ["book_id"], name: "index_chapters_on_book_id", using: :btree
   add_index "chapters", ["seq"], name: "index_chapters_on_seq", using: :btree
 
+  create_table "crawlers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "test_list_url"
+    t.string   "test_item_url"
+    t.string   "list_url_pattern"
+    t.string   "item_url_pattern"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   add_foreign_key "books", "authors"
+  add_foreign_key "books", "crawlers"
   add_foreign_key "chapters", "books"
 end

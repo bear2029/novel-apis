@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -18,6 +17,8 @@ Rails.application.routes.draw do
      resources :books, only: [:index,:create,:show,:update] do
 	     resources :chapters, only: [:index,:show,:create,:update]
      end
+     resources :chapters, only: [:index,:show,:create,:update]
+     resources :crawlers, only: [:index,:show,:create,:update,:destroy]
 
   # Example resource route with options:
   #   resources :products do
